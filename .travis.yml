@@ -4,9 +4,3 @@ rvm: 2.6
 
 install: script/bootstrap
 script: script/cibuild
-
-# safelist
-branches:
-  only:
-  - main
-  - gh-pages
