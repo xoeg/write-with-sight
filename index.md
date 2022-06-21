@@ -2,11 +2,11 @@
 layout: default
 ---
 
-# The Challenge
-
+**The Challenge**: 
 I saw a job position at Tobii, for an "algorithm Developer", and while I have developed plenty of algorithms to process images and time series, I have never worked in computer vision. So I thought: what if I write my _cover letter_ by developing an algorithm that can track my eyesight to write letters down? After all,  
 
 > How hard could it be?
+
 > TLDR: **Very hard**.
 
 This is as far as I got:
