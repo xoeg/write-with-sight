@@ -11,6 +11,9 @@ After 2 days of work, this is as far as I got:
 
 ![tobii_pp](/assets/tobii_pp.jpg)
 
+
+* * *
+
 # The Algorithm
 I constrained myself to work for at most 2 days in this project. During the scoping phase I decided to divide the workflow into four parts:
 1. **Scope**: Decide how the algorithm will work.
@@ -57,12 +60,9 @@ I used TensorFlow to build and train the CNN you can see it in the jupyter noteb
 The deployment takes place in the script called `wws_write.py`.
 I again used wxPython to create a GUI which highlights a cell, the main difference is that this time it used the CNN to predict where I am looking at, based on the input from the camera. 
 
-<p float="left">
-  <img src="/assets/vid_me.gif"  />
-  <img src="/assets/vid_b.gif"  /> 
-</p>
-
-
+Me writing something (I guess) |  Writing letter "b"
+:-------------------------:|:-------------------------:
+![](/assets/vid_me.gif)  |  ![](/assets/vid_b.gif)
 
 
 In the end, at least I managed to write this:
