@@ -57,8 +57,13 @@ I used TensorFlow to build and train the CNN you can see it in the jupyter noteb
 The deployment takes place in the script called `wws_write.py`.
 I again used wxPython to create a GUI which highlights a cell, the main difference is that this time it used the CNN to predict where I am looking at, based on the input from the camera. 
 
-![vid_me](/assets/vid_me.gif)
-![vid_b](/assets/vid_b.gif)
+<p float="left">
+  <img src="/assets/vid_me.gif"  />
+  <img src="/assets/vid_b.gif"  /> 
+</p>
+
+
+
 
 In the end, at least I managed to write this:
 
