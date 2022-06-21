@@ -3,140 +3,65 @@ layout: default
 ---
 
 **The Challenge**: 
-I saw a job position at Tobii, for an "algorithm Developer", and while I have developed plenty of algorithms to process images and time series, I have never worked in computer vision. So I thought: what if I write my _cover letter_ by developing an algorithm that can track my eyesight to write letters down? After all,  
-
-> How hard could it be?
+I saw a job position at Tobii, for an "Algorithm Developer", and while I have developed plenty of algorithms to process images and time series, I have never worked in computer vision. So I thought: what if I write my _cover letter_ by developing an algorithm that can track my eyesight to write letters down? After all, how hard could it be?
 
 > TLDR: **Very hard**.
 
-This is as far as I got:
+After 2 days of work, this is as far as I got:
 
 ![tobii_pp](/assets/tobii_pp.jpg)
 
 # The Algorithm
+I constrained myself to work for at most 2 days in this project. During the scoping phase I decided to divide the workflow into four parts:
+1. **Scope**: Decide how the algorithm will work.
+2. **Data**: Develop program to gather data.
+3. **Model**: Use that data to train a neural network.
+4. **Deployment**: Used the trained model to write letters. 
 
+I iterated this process about 15 times until I settled on the following. 
 
-# Getting the data and training the CNN
+## Scope
+A quick online search for pixelated alphabets showed that I can write any letter in a grid of 5 rows and 4 columns:
 
-# The Result
+![abc_pix](/assets/abc_pix.jpg)
 
+Hence, I settled on a 5 x 4 grid.
+The remaining task was to develop an algorithm that can track my eyesight and highlight or paint each cell. Therefore, I needed two things:
+* An image of where I am looking at.
+* A model that can recognize where I am looking at.
 
-Text can be **bold**, _italic_, or ~~strikethrough~~.
+For the modelling part, I knew from the start that I was going to use a convolutional neural network (CNN), because they are very good at dealing with image classification. The main problem was that to train these models, one usually requires a large dataset. 
 
-[Link to another page](./another-page.html).
+## Data
+To gather the data I wrote the script called `wws_get_data.py`. 
+I used wxPython to create a GUI which highlights a cell. 
 
-There should be whitespace between paragraphs.
+![wws_get_data](/assets/wws_get_data.jpg)
 
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
+Then upon clicking on the snap button it takes a picture and the highlighted cell changes location. 
+Each picture taken was stored in a folder corresponding to the location of the highlighted cell.
+In this way I could train the CNN later on. 
 
-# Header 1
+The picture taken was a snapshot from the webcam, but after many iterations, I found out that I could achieve the best accuracy in the model if the pictures only included my eyes. So, I developed a low cost technological device that helped me achieve the task:
 
-This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
+![me_data](/assets/me_data.jpg)
 
-## Header 2
+I ended up takeing 620 pictures, 31 for each cell. 
 
-> This is a blockquote following a header.
->
-> When something is important enough, you do it even if the odds are not in your favor.
+## Model
+I used TensorFlow to build and train the CNN you can see it in the jupyter notebook `train_model.ipynb`. Despite the seemingly huge dataset that I got, the loss and accuracy curves gave a clear indication of overfitting. I could have changed the model, or get more data, but it was a race against time, so I decided to proceed with a model that was accurate about 80% of the time. 
 
-### Header 3
+![curves](/assets/curves.jpg)
 
-```js
-// Javascript code with syntax highlighting.
-var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l)
-  return true;
-}
-```
+## Deployment 
+The deployment takes place in the script called `wws_write.py`.
+I again used wxPython to create a GUI which highlights a cell, the main difference is that this time it used the CNN to predict where I am looking at, based on the input from the camera. 
 
-```ruby
-# Ruby code with syntax highlighting
-GitHubPages::Dependencies.gems.each do |gem, version|
-  s.add_dependency(gem, "= #{version}")
-end
-```
+![vid_me](/assets/vid_me.gif)
+![vid_b](/assets/vid_b.gif)
 
-#### Header 4
+In the end, at least I managed to write this:
 
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-
-##### Header 5
-
-1.  This is an ordered list following a header.
-2.  This is an ordered list following a header.
-3.  This is an ordered list following a header.
-
-###### Header 6
-
-| head1        | head two          | three |
-|:-------------|:------------------|:------|
-| ok           | good swedish fish | nice  |
-| out of stock | good and plenty   | nice  |
-| ok           | good `oreos`      | hmm   |
-| ok           | good `zoute` drop | yumm  |
-
-### There's a horizontal rule below this.
+![tobii_pp](/assets/tobii_pp.jpg)
 
 * * *
-
-### Here is an unordered list:
-
-*   Item foo
-*   Item bar
-*   Item baz
-*   Item zip
-
-### And an ordered list:
-
-1.  Item one
-1.  Item two
-1.  Item three
-1.  Item four
-
-### And a nested list:
-
-- level 1 item
-  - level 2 item
-  - level 2 item
-    - level 3 item
-    - level 3 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-
-### Small image
-
-![Octocat](https://github.githubassets.com/images/icons/emoji/octocat.png)
-
-### Large image
-
-![Branching](https://guides.github.com/activities/hello-world/branching.png)
-
-
-### Definition lists can be used with HTML syntax.
-
-<dl>
-<dt>Name</dt>
-<dd>Godzilla</dd>
-<dt>Born</dt>
-<dd>1952</dd>
-<dt>Birthplace</dt>
-<dd>Japan</dd>
-<dt>Color</dt>
-<dd>Green</dd>
-</dl>
-
-```
-Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-```
-
-```
-The final element.
-```
