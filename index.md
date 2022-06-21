@@ -69,7 +69,7 @@ In the end, at least I managed to write this:
 
 ![tobii_pp](/assets/tobii_pp.jpg)
 
-and no, the second letter is not a Q! =D.
+and no, the second letter is not a Q! =).
 
 * * *
 
